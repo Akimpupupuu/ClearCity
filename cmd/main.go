@@ -3,8 +3,8 @@ package main
 import (
 	"log"
 
-	"github.com/Akimpupupuu/ClearCity/db"
 	"github.com/Akimpupupuu/ClearCity/internal/config"
+	"github.com/Akimpupupuu/ClearCity/internal/db"
 	"github.com/Akimpupupuu/ClearCity/internal/http"
 )
 
