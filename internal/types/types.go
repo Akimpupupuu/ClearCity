@@ -3,6 +3,8 @@ package types
 import "time"
 
 type ReportStorage interface {
+	CreateReport(Report) error
+	GetReports() error
 }
 
 type UserStorage interface {
