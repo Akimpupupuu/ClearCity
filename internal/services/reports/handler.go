@@ -1,6 +1,7 @@
 package reports
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/Akimpupupuu/ClearCity/internal/types"
@@ -17,21 +18,23 @@ func NewHandler(storage types.ReportStorage) *Handler {
 
 func (handler *Handler) CreateReport(w http.ResponseWriter, r *http.Request) {
 	var payload types.ReportPayload
-	if err := utils.ParseJSON(r, payload); err != nil {
+	if err := utils.ParseJSON(r, &payload); err != nil {
 		utils.WriteError(w, http.StatusBadRequest, err)
 		return
 	}
-	if err := handler.Storage.CreateReport(types.Report{
+
+	report, err := handler.Storage.CreateReport(types.Report{
+		Title:       payload.Title,
 		Address:     payload.Address,
 		Description: payload.Description,
-	}); err != nil {
+	})
+
+	if err != nil {
 		utils.WriteError(w, http.StatusInternalServerError, err)
 		return
 	}
 
+	fmt.Printf("this is our report: %s\n", report.Description)
+
 	utils.WriteJSON(w, http.StatusCreated, nil)
-}
-
-func (handler *Handler) GetReports(w http.ResponseWriter, r *http.Request) {
-
 }

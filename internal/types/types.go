@@ -3,37 +3,19 @@ package types
 import "time"
 
 type ReportStorage interface {
-	CreateReport(Report) error
-	GetReports() error
-}
-
-type UserStorage interface {
+	CreateReport(Report) (*Report, error)
 }
 
 type ReportPayload struct {
-	Address     string
-	Description string
+	Title       string `json:"title"`
+	Address     string `json:"address"`
+	Description string `json:"description"`
 }
 
 type Report struct {
-	Id          int
-	UserId      int
-	Address     string
-	Description string
-	CreatedAt   time.Time
-}
-
-type UserPayload struct {
-	Name        string
-	Email       string
-	PhoneNumber string
-	Password    string
-}
-
-type User struct {
-	Id          int
-	Name        string
-	Email       string
-	PhoneNumber string
-	Password    string
+	Id          int       `json:"id"`
+	Title       string    `json:"title"`
+	Address     string    `json:"address"`
+	Description string    `json:"description"`
+	CreatedAt   time.Time `json:"created_at"`
 }
