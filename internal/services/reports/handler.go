@@ -1,9 +1,9 @@
 package reports
 
 import (
-	"fmt"
 	"net/http"
 
+	"github.com/Akimpupupuu/ClearCity/internal/mailer"
 	"github.com/Akimpupupuu/ClearCity/internal/types"
 	"github.com/Akimpupupuu/ClearCity/internal/utils"
 )
@@ -34,7 +34,10 @@ func (handler *Handler) CreateReport(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	fmt.Printf("this is our report: %s\n", report.Description)
+	if err := mailer.Send(report); err != nil {
+		utils.WriteError(w, http.StatusInternalServerError, err)
+		return
+	}
 
 	utils.WriteJSON(w, http.StatusCreated, nil)
 }
