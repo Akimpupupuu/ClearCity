@@ -13,7 +13,7 @@ func Send(report *types.Report) error {
 
 	m := gomail.NewMessage()
 	m.SetHeader("From", "damirmagdeev1054@gmail.com")
-	m.SetHeader("To", "dnsgon3@gmail.com")
+	m.SetHeader("To", "damirmagdeev1054@gmail.com")
 	m.SetHeader("New report!")
 	m.SetBody("text/html", reportString)
 
